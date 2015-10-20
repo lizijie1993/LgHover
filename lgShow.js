@@ -1,5 +1,9 @@
 (function() {
 
+    /**
+     * LgHover构造函数
+     * @param {Dom} contentEle 最初展示的内容的DOM节点
+     */
     function LgHover(contentEle) {
         //元素
         this.ele = contentEle;
@@ -32,19 +36,24 @@
 
     LgHover.prototype = {
         constructor: LgHover,
-        leavePos: [{
-            'left': '0',
-            'top': '-100%'
-        }, {
-            'left': '100%',
-            'top': '0'
-        }, {
-            'left': '0',
-            'top': '100%'
-        }, {
-            'left': '-100%',
-            'top': '0'
-        }],
+        leavePos: {
+            'TOP': {
+                'left': '0',
+                'top': '-100%'
+            },
+            'RIGHT': {
+                'left': '100%',
+                'top': '0'
+            },
+            'BOTTOM': {
+                'left': '0',
+                'top': '100%'
+            },
+            'LEFT': {
+                'left': '-100%',
+                'top': '0'
+            }
+        },
         _init: function() {
             var self = this;
 
@@ -57,41 +66,12 @@
                 self._onMouseLeave.call(self, e);
             }, false);
         },
-        /**
-         * 获取鼠标移入移出的边界
-         * @param  {Object} event 事件对象，只支持mouseenter和mouseleave
-         * @return {Number}       'TOP'=0、'RIGHT'=1、'BOTTOM'=2、'LEFT'=3之一
-         */
-        _getDirection: function(event) {
-
-            //事件类型判断
-            if (toString.call(event) !== '[object MouseEvent]' || (event.type !== 'mouseenter' && event.type !== 'mouseleave')) return;
-
-            //鼠标在页面中的位置
-            var mouseX = event.pageX || (event.clientX + document.documentElement.scrollLeft || document.body.scrollLeft),
-                mouseY = event.pageY || (event.clientY + document.documentElement.scrollTop || document.body.scrollTop);
-
-            //若非正方形，将其长边缩放为短边长度
-            var w = this.wHRatio > 1 ? (mouseX - this.centerPoint.x) / this.wHRatio : (mouseX - this.centerPoint.x),
-                h = this.wHRatio < 1 ? (this.centerPoint.y - mouseY) * this.wHRatio : (this.centerPoint.y - mouseY);
-
-            //触发事件时的角度
-            var angle = Math.atan2(h, w) * 180 / Math.PI;
-
-            //根据角度判断从哪个方向进入或离开元素
-            if (angle >= -135 && angle < -45) {
-                return 2;
-            } else if (angle >= -45 && angle < 45) {
-                return 1;
-            } else if (angle >= 45 && angle < 135) {
-                return 0;
-            } else {
-                return 3;
-            }
-
-        },
         _onMouseLeave: function(e) {
-            var dir = this._getDirection(e);
+            var mousePos = getMousePosition(e),
+                centerPoint = this.getCenterPoint(),
+                wHRatio = this.getCenterPoint();
+
+            var dir = getDirection(centerPoint, mousePos, wHRatio);
 
             setCss(this.cover, this.leavePos[dir]);
 
@@ -100,8 +80,13 @@
             });
         },
         _onMouseEnter: function(e) {
-            var dir = this._getDirection(e),
-                that = this;
+            var mousePos = getMousePosition(e),
+                centerPoint = this.getCenterPoint(),
+                wHRatio = this.getCenterPoint();
+
+            var dir = getDirection(centerPoint, mousePos, wHRatio);
+
+            that = this;
 
             setCss(this.cover, {
                 'transition': 'none'
@@ -115,6 +100,12 @@
                     'top': '0'
                 });
             }, 20));
+        },
+        getCenterPoint: function() {
+            return this.centerPoint;
+        },
+        getWHRatio: function() {
+            return this.wHRatio;
         }
     };
 
@@ -125,6 +116,53 @@
             style[key] = obj[key];
 
         }
+    }
+
+    /**
+     * 获取事件发生时，鼠标的位置
+     * @param  {Object} event 事件对象
+     * @return {Object}       坐标对象
+     */
+    function getMousePosition(event) {
+        //事件类型判断
+        if (toString.call(event) !== '[object MouseEvent]') return;
+
+        //鼠标在页面中的位置
+        var mouseX = event.pageX || (event.clientX + document.documentElement.scrollLeft || document.body.scrollLeft),
+            mouseY = event.pageY || (event.clientY + document.documentElement.scrollTop || document.body.scrollTop);
+
+        return {
+            x: mouseX,
+            y: mouseY
+        };
+    }
+
+    /**
+     * 获取鼠标移入/移除元素的边界
+     * @param  {Object} centerPoint 元素中心点坐标
+     * @param  {Object} mousePos    事件触发时鼠标位置
+     * @param  {Number} wHRatio     元素宽高比
+     * @return {String}             边界，'TOP'、'RIGHT'、'BOTTOM'、'LEFT'
+     */
+    function getDirection(centerPoint, mousePos, wHRatio) {
+        //若非正方形，将其长边缩放为短边长度
+        var w = wHRatio > 1 ? (mousePos.x - centerPoint.x) / wHRatio : (mousePos.x - centerPoint.x),
+            h = wHRatio < 1 ? (centerPoint.y - mousePos.y) * wHRatio : (centerPoint.y - mousePos.y);
+
+        //触发事件时的角度
+        var angle = Math.atan2(h, w) * 180 / Math.PI;
+
+        //根据角度判断从哪个方向进入或离开元素
+        if (angle >= -135 && angle < -45) {
+            return 'BOTTOM';
+        } else if (angle >= -45 && angle < 45) {
+            return 'RIGHT';
+        } else if (angle >= 45 && angle < 135) {
+            return 'TOP';
+        } else {
+            return 'LEFT';
+        }
+
     }
 
     //获取元素相对于page的x轴偏移
