@@ -933,7 +933,7 @@
         <article class="markdown-body">
             <h1>
 <a id="user-content-lghover" class="anchor" href="#lghover" aria-hidden="true"><span class="octicon octicon-link"></span></a>LgHover</h1>
-            <p><a href="http://www.lagou.com/">拉勾网</a>主页上见到的效果，鼠标从元素不同方向滑入，则hover页从不同方向移入。</p>
+            <p>拉勾网主页上见到的效果，鼠标从元素不同方向滑入，则hover页从不同方向移入。</p>
             <h2>
 <a id="user-content-html" class="anchor" href="#html" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML</h2>
             <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">ul</span>&gt;
@@ -969,15 +969,15 @@
     <span class="pl-c1"><span class="pl-c1">height</span></span>: <span class="pl-c1">100<span class="pl-k">%</span></span>;
     <span class="pl-c1"><span class="pl-c1">z-index</span></span>: <span class="pl-c1">2</span>;
 }</pre></div>
-            <p>此处的<code>li</code>可换成任意的块级元素；<code>a</code>元素仅作跳转目的。</p>
+            <p>此处的li可换成任意的块级元素；a元素仅作跳转目的。</p>
             <h2>
-<a id="user-content-使用方法" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法</h2>
-            <div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> slice <span class="pl-k">=</span> <span class="pl-c1">Array</span>.<span class="pl-c1">prototype</span>.slice;
+<a id="user-content-使用方法-usage" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法 Usage</h2>
+            <p>可以传入单个dom元素，也可以传入NodeList或数组。</p>
+            <div class="highlight highlight-source-js"><pre><span class="pl-c">//单个dom元素</span>
+<span class="pl-k">var</span> content <span class="pl-k">=</span> <span class="pl-c1">document</span>.querySelector(<span class="pl-s"><span class="pl-pds">'</span>.content<span class="pl-pds">'</span></span>);
 
-<span class="pl-c">//遍历每一个需要实现该效果的dom节点，并新建实例。</span>
-slice.<span class="pl-c1">call</span>(<span class="pl-c1">document</span>.querySelectorAll(<span class="pl-s"><span class="pl-pds">'</span>.content<span class="pl-pds">'</span></span>)).forEach(<span class="pl-k">function</span>(<span class="pl-smi">dom</span>) {
-    <span class="pl-k">new</span> <span class="pl-en">LgHover</span>(dom);
-});</pre></div>
+<span class="pl-c">//Nodelist</span>
+<span class="pl-k">var</span> contents <span class="pl-k">=</span> <span class="pl-c1">document</span>.querySeletorAll(<span class="pl-s"><span class="pl-pds">'</span>.content<span class="pl-pds">'</span></span>);</pre></div>
         </article>
     </div>
     <div class="demo">
@@ -1006,11 +1006,6 @@ slice.<span class="pl-c1">call</span>(<span class="pl-c1">document</span>.queryS
 </body>
 <script src="lgShow.js"></script>
 <script type="text/javascript">
-var slice = Array.prototype.slice;
-
-// slice.call(document.querySelectorAll('.content')).forEach(function(dom) {
-//     lgHover(dom);
-// });
 lgHover(document.querySelectorAll('.content'))
 </script>
 
