@@ -1008,9 +1008,10 @@ slice.<span class="pl-c1">call</span>(<span class="pl-c1">document</span>.queryS
 <script type="text/javascript">
 var slice = Array.prototype.slice;
 
-slice.call(document.querySelectorAll('.content')).forEach(function(dom) {
-    new LgHover(dom);
-});
+// slice.call(document.querySelectorAll('.content')).forEach(function(dom) {
+//     lgHover(dom);
+// });
+lgHover(document.querySelectorAll('.content'))
 </script>
 
 </html>
