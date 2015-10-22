@@ -68,6 +68,7 @@
         top: 0;
         left: 0;
         z-index: 2;
+        visibility: hidden;
     }
     </style>
     <!-- Markdown 样式 -->
@@ -935,14 +936,29 @@
         <article class="markdown-body">
             <h1>
 <a id="user-content-lghover" class="anchor" href="#lghover" aria-hidden="true"><span class="octicon octicon-link"></span></a>LgHover</h1>
-            <p>拉勾网主页上见到的效果，鼠标从元素不同方向滑入，则hover页从不同方向移入。</p>
+            <p>拉勾网主页上见到的效果:鼠标从元素不同方向滑入/滑出，则cover页从对应方向滑入/滑出。</p>
+            <h2>
+<a id="user-content-在线实例-demo" class="anchor" href="#%E5%9C%A8%E7%BA%BF%E5%AE%9E%E4%BE%8B-demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>在线实例 Demo</h2>
+            <p><a href="http://lizijie1993.github.io/LgHover/lgShow.html">Demo</a></p>
             <h2>
 <a id="user-content-html" class="anchor" href="#html" aria-hidden="true"><span class="octicon octicon-link"></span></a>HTML</h2>
             <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">ul</span>&gt;
     &lt;<span class="pl-ent">li</span>&gt;
         &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;
             &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
-            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>cover<span class="pl-pds">"</span></span> <span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>top:100%;left:100%;<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>cover<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        &lt;/<span class="pl-ent">a</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li</span>&gt;
+        &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>cover<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        &lt;/<span class="pl-ent">a</span>&gt;
+    &lt;/<span class="pl-ent">li</span>&gt;
+    &lt;<span class="pl-ent">li</span>&gt;
+        &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>cover<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
         &lt;/<span class="pl-ent">a</span>&gt;
     &lt;/<span class="pl-ent">li</span>&gt;
 &lt;/<span class="pl-ent">ul</span>&gt;</pre></div>
@@ -950,7 +966,18 @@
                 <li>
                     <code>.cover</code>元素紧跟<code>.content</code>元素；</li>
                 <li>两者由一父元素包裹；</li>
-                <li>类名可自定义。</li>
+                <li>
+                    <p><code>li</code>可替换为其他块级元素(对应的css也需要改变),例如:</p>
+                    <div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span>&gt;
+    &lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>#<span class="pl-pds">"</span></span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>cover<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+    &lt;/<span class="pl-ent">a</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+                </li>
+                <li>
+                    <p>类名可自定义。</p>
+                </li>
             </ol>
             <h2>
 <a id="user-content-css" class="anchor" href="#css" aria-hidden="true"><span class="octicon octicon-link"></span></a>CSS</h2>
@@ -969,9 +996,11 @@
     <span class="pl-c1"><span class="pl-c1">position</span></span>: <span class="pl-c1">absolute</span>;
     <span class="pl-c1"><span class="pl-c1">width</span></span>: <span class="pl-c1">100<span class="pl-k">%</span></span>;
     <span class="pl-c1"><span class="pl-c1">height</span></span>: <span class="pl-c1">100<span class="pl-k">%</span></span>;
+    <span class="pl-c1"><span class="pl-c1">top</span></span>: <span class="pl-c1">0</span>;
+    <span class="pl-c1"><span class="pl-c1">left</span></span>: <span class="pl-c1">0</span>;
     <span class="pl-c1"><span class="pl-c1">z-index</span></span>: <span class="pl-c1">2</span>;
+    <span class="pl-c1"><span class="pl-c1">visibility</span></span>: <span class="pl-c1">hidden</span>;
 }</pre></div>
-            <p>此处的li可换成任意的块级元素；a元素仅作跳转目的。</p>
             <h2>
 <a id="user-content-使用方法-usage" class="anchor" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95-usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>使用方法 Usage</h2>
             <p>可以传入单个dom元素，也可以传入NodeList或数组。</p>

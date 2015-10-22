@@ -323,6 +323,8 @@
 
             this._translate(100, 100);
 
+            this.cover.style.visibility = 'visible';
+
             //事件绑定
             utils.addEvent(this.parent, 'mouseenter', function(e) {
                 e = utils.getEvent(e);
