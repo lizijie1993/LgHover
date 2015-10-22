@@ -65,6 +65,8 @@
         position: absolute;
         width: 100%;
         height: 100%;
+        top: 0;
+        left: 0;
         z-index: 2;
     }
     </style>
@@ -985,20 +987,20 @@
         <ul>
             <li>
                 <a href="#">
-                    <div class="content"></div>
-                    <div class="cover" style="top:100%;left:100%;"></div>
+                    <div id="content" class="content"></div>
+                    <div class="cover"></div>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <div class="content"></div>
-                    <div class="cover" style="top:100%;left:100%;"></div>
+                    <div class="cover"></div>
                 </a>
             </li>
             <li>
                 <a href="#">
                     <div class="content"></div>
-                    <div class="cover" style="top:100%;left:100%;"></div>
+                    <div class="cover"></div>
                 </a>
             </li>
         </ul>
@@ -1006,7 +1008,31 @@
 </body>
 <script src="lgShow.js"></script>
 <script type="text/javascript">
-lgHover(document.querySelectorAll('.content'))
+function getByClass(className) {
+
+    if (document.querySeletorAll) {
+        return document.querySeletorAll('.' + className);
+    } else {
+        var eles = document.getElementsByTagName('*'),
+            arr = [],
+            len = eles.length,
+            classLen,
+            i = 0,
+            currClass,
+            reg = new RegExp('(^|\\s+)' + className + '(\\s+|$)', 'g');
+
+        for (; i < len; i++) {
+            currClass = eles[i].className;
+            if (reg.test(currClass)) {
+                arr.push(eles[i]);
+            }
+        }
+    }
+
+    return arr;
+}
+lgHover(getByClass('content'));
+// lgHover(document.getElementById('content'));
 </script>
 
 </html>
